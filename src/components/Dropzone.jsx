@@ -56,7 +56,7 @@ const Dropzone = () => {
     <div
       className={`${
         isDragActive ? "border-[#E50101] opacity-40" : "border-[#D7DADC]"
-      } border-2 border-dashed h-48  rounded-md space-y-3 flex flex-col items-center justify-center`}
+      } border-2 border-dashed h-48  rounded-md  flex flex-col items-center justify-center`}
       onDragEnter={handleDrag}
       onDragLeave={handleLeave}
       onDragOver={handleOver}

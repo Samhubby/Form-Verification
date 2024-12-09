@@ -2,7 +2,8 @@ import { Button, Dropzone, Input, Select, Textarea } from "./index.js";
 
 const Form = () => {
   return (
-    <div className="px-[48px] font-inter space-y-8 py-[56px] rounded-2xl bg-white w-[894px] h-[1624px0] mx-auto">
+    <div className="px-[48px] font-inter space-y-10 py-[56px] rounded-2xl bg-white w-[894px] h-[1624px0] mx-auto">
+      
       <div className="space-y-3">
         <h1 className="text-[20px] font-medium">
           Tell us more about your business
@@ -14,6 +15,7 @@ const Form = () => {
         </p>
       </div>
 
+{/* Input Components  */}
       <div className="space-y-4 w-[798px] h-[708px]">
         <div className="flex justify-between">
           <Input
@@ -123,13 +125,16 @@ const Form = () => {
             className="w-96"
           />
         </div>
+
       </div>
 
-      <div className="space-y-3">
+{/* Dropzones  */}
+      <div className="space-y-3 ">
         <h1 className="text-lg font-medium">
           Certification of Incorporation{" "}
           <span className="text-[#FF3B30]"> *</span>
         </h1>
+
         <p className="text-[#636567] text-xs ">
           Upload the incorporation certificate
         </p>
@@ -144,6 +149,7 @@ const Form = () => {
         <Dropzone />
       </div>
 
+{/* Button Section */}
       <div className="flex justify-between">
         <Button
           children="Previous"
@@ -151,6 +157,7 @@ const Form = () => {
         />
         <Button children="Next" className="p-2 w-20 text-white " />
       </div>
+
     </div>
   );
 };

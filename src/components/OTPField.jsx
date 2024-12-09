@@ -39,9 +39,9 @@ const OTPField = () => {
     <div className=" space-x-7 w- flex flex-row">
       {inputs.map((value, index) => {
         return (
-          <div key={index}>
+          <div key={index} className="flex items-center">
             {index === 3 ? (
-              <span className="text-xl mr-7 font-medium">-</span>
+              <span className="text-4xl mr-7 font-medium">-</span>
             ) : null}
             <input
               ref={(currentInput) => (reference.current[index] = currentInput)}
