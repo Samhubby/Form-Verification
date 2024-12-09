@@ -1,64 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const Dropzone = () => {
   const [isDragActive, setIsDragActive] = useState(false);
-  const [imageUpload, setImageUpload] = useState(null);
-  const [fileSize, setFileSize] = useState(false);
+  const [isImageUploaded, setIsImageUploaded] = useState(null);
+  const [isFileSize, setIsFileSize] = useState(false);
+  const ref = useRef(null);
 
   const handleDrag = (e) => {
     e.preventDefault();
     setIsDragActive(e.type === "dragenter");
   };
 
-  const handleDragOver = (e) => {
+  const handleLeave = (e) => {
+    console.log(e.type);
     e.preventDefault();
-    if (!isDragActive) setIsDragActive(true);
+    setIsDragActive(false);
+  };
+
+  const handleOver = (e) => {
+    e.preventDefault();
+    setIsDragActive(true);
   };
 
   const handleDrop = (e) => {
-    e.preventDefault();
     const file = e.dataTransfer.files[0];
-    if (file) {
-      const fileSizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+    e.preventDefault();
 
-      if (fileSizeInMB > 50) {
-        setImageUpload(true);
-        setFileSize(true);
-        setIsDragActive(false);
-        return;
-      }
-      setImageUpload(file);
-      setFileSize(false);
+    if (file.size / 1024 / 1024 > 50) {
       setIsDragActive(false);
+      setIsFileSize(true);
+      setIsImageUploaded(file);
+      return;
     }
+    setIsDragActive(false);
+    setIsFileSize(false);
+    setIsImageUploaded(file);
+  };
+
+  const handleInput = () => {
+    ref.current.click();
   };
 
   const handleFileChange = (e) => {
-    document.getElementById("file").click();
     const file = e.target.files[0];
-    if (file) {
-      const fileSizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-      if (fileSizeInMB > 50) {
-        setImageUpload(true);
-        setFileSize(true);
-      } else {
-        setImageUpload(file);
-        setFileSize(false);
-      }
-    }
-  };
 
+    if (file.size / 1024 / 1024 > 50) {
+      setIsFileSize(true);
+      setIsImageUploaded(file);
+      return;
+    }
+    setIsFileSize(false);
+    setIsImageUploaded(file);
+  };
   return (
     <div
       className={`${
-        isDragActive ? "border-[#E50101] opacity-50" : "border-[#D7DADC]"
+        isDragActive ? "border-[#E50101] opacity-40" : "border-[#D7DADC]"
       } border-2 border-dashed h-48  rounded-md space-y-3 flex flex-col items-center justify-center`}
       onDragEnter={handleDrag}
-      onDragLeave={handleDrag}
-      onDragOver={handleDragOver}
+      onDragLeave={handleLeave}
+      onDragOver={handleOver}
       onDrop={handleDrop}
     >
-      {!imageUpload ? (
+      {!isImageUploaded ? (
         <div>
           <div className="bg-[#F6F6F6] w-12 h-12 mx-auto rounded-full flex items-center justify-center">
             <svg
@@ -96,8 +100,8 @@ const Dropzone = () => {
           <div>
             <span className="text-[#636567] text-sm">
               <span
-                onClick={handleFileChange}
                 className="underline text-black cursor-pointer"
+                onClick={handleInput}
               >
                 Click to upload
               </span>{" "}
@@ -108,27 +112,35 @@ const Dropzone = () => {
               Maximum file size is 50MB
             </span>
           </div>
-          <input
-            type="file"
-            id="file"
-            hidden
-            onChange={handleFileChange}
-            required
-          />
-        </div>
-      ) : !fileSize ? (
-        <div>
-          <p className="text-sm text-green-500">
-            Successfully uploaded: {imageUpload?.name}
-          </p>
         </div>
       ) : (
         <div>
-          <p className="text-sm cursor-pointer text-red-500">
-            File size exceeded. Please drag a file less than 50MB.
-          </p>
+          {!isFileSize ? (
+            <div>
+              <p className="text-sm text-green-500">
+                Successfully uploaded: {isImageUploaded.name}
+              </p>
+            </div>
+          ) : (
+            <div>
+              <p className="text-sm cursor-pointer text-red-500">
+                File size exceeded. Please drag a file less than 50MB.
+              </p>
+              <button className="text-sm underline" onClick={handleInput}>
+                Retry
+              </button>
+            </div>
+          )}
         </div>
       )}
+      <input
+        ref={ref}
+        onChange={handleFileChange}
+        type="file"
+        id="file"
+        hidden
+        required
+      />
     </div>
   );
 };
