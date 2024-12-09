@@ -8,6 +8,8 @@ import OTPField from "./OTPField";
 import Card from "./Card";
 import Form from "./Form";
 import Stepper from "./Stepper";
+import Timer from './Timer'
+import LayoutCards from "./LayoutCards";
 
 export {
   Input,
@@ -20,5 +22,6 @@ export {
   Card,
   Form,
   Stepper,
-  
+  Timer,
+  LayoutCards
 };

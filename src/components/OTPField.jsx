@@ -39,7 +39,7 @@ const OTPField = () => {
     <div className=" space-x-7 w- flex flex-row">
       {inputs.map((value, index) => {
         return (
-          <div>
+          <div key={index}>
             {index === 3 ? (
               <span className="text-xl mr-7 font-medium">-</span>
             ) : null}
@@ -50,6 +50,7 @@ const OTPField = () => {
               type="text"
               value={value}
               onKeyDown={(e) => handleChange(e, index)}
+              required
               onPaste={handlePaste}
             />
           </div>
