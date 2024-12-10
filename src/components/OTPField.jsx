@@ -1,5 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * OTPField component renders a 6-digit OTP input field with individual input boxes.
+ * 
+ * Features:
+ * - Allows navigation between input boxes using arrow keys.
+ * - Handles backspace to clear the current input and move focus to the previous box.
+ * - Automatically moves focus to the next input box upon entering a digit.
+ * - Supports pasting a 6-digit OTP directly into the input fields.
+ * - Automatically focuses on the first input box when the component mounts.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <OTPField />
+ * )
+ */
 const OTPField = () => {
   const [inputs, setInputs] = useState(new Array(6).fill(""));
   const reference = useRef([]);

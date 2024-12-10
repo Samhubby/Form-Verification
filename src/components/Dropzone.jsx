@@ -1,5 +1,26 @@
-import React, { useState, useRef } from "react";
-
+import { useState, useRef } from "react";
+/**
+ * Dropzone component allows users to drag and drop files or click to upload.
+ * It provides visual feedback for drag events and handles file size validation.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Dropzone />
+ * )
+ *
+ * @returns {JSX.Element} The rendered Dropzone component.
+ *
+ * @function
+ * @name Dropzone
+ *
+ * @description
+ * - Uses `useState` to manage drag state, file upload state, and file size validation.
+ * - Uses `useRef` to reference the hidden file input element.
+ * - Handles drag events (`dragenter`, `dragleave`, `dragover`, `drop`) to provide visual feedback.
+ * - Validates file size (maximum 50MB) and updates state accordingly.
+ * - Displays appropriate messages based on file upload status and size validation.
+ */
 const Dropzone = () => {
   const [isDragActive, setIsDragActive] = useState(false);
   const [isImageUploaded, setIsImageUploaded] = useState(null);
@@ -12,7 +33,6 @@ const Dropzone = () => {
   };
 
   const handleLeave = (e) => {
-    console.log(e.type);
     e.preventDefault();
     setIsDragActive(false);
   };
@@ -35,10 +55,6 @@ const Dropzone = () => {
     setIsDragActive(false);
     setIsFileSize(false);
     setIsImageUploaded(file);
-  };
-
-  const handleInput = () => {
-    ref.current.click();
   };
 
   const handleFileChange = (e) => {
@@ -101,7 +117,7 @@ const Dropzone = () => {
             <span className="text-[#636567] text-sm">
               <span
                 className="underline text-black cursor-pointer"
-                onClick={handleInput}
+                onClick={() => ref.current.click()}
               >
                 Click to upload
               </span>{" "}
@@ -126,7 +142,10 @@ const Dropzone = () => {
               <p className="text-sm cursor-pointer text-red-500">
                 File size exceeded. Please drag a file less than 50MB.
               </p>
-              <button className="text-sm underline" onClick={handleInput}>
+              <button
+                className="text-sm underline"
+                onClick={() => ref.current.click()}
+              >
                 Retry
               </button>
             </div>
