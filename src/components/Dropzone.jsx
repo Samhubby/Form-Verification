@@ -64,7 +64,7 @@ const Dropzone = () => {
     >
       {!isImageUploaded ? (
         <div>
-          <div className="bg-[#F6F6F6] w-12 h-12 mx-auto rounded-full flex items-center justify-center">
+          <div className="bg-[#F6F6F6] w-12 h-12 mb-2 mx-auto rounded-full flex items-center justify-center">
             <svg
               width="32"
               height="32"
