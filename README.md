@@ -1,6 +1,6 @@
-# CodAvatar
+# Form-Verification
 
-CodAvatar is a React application built with Vite. 
+Form-Verification is a React application built with Vite. 
 It includes various components such as forms, dropzones, and OTP fields, and uses Tailwind CSS for styling.
 
 
